@@ -28,7 +28,7 @@ export function NewTransactionModal({isOpen, onRequestClose} : NewTransactionMod
            type,
 
        }
-       api.post('/transections', data)
+       api.post('/transactions', data)
     }
      
     return (
@@ -64,7 +64,7 @@ export function NewTransactionModal({isOpen, onRequestClose} : NewTransactionMod
                         isActive = {type === 'deposit'}
                         activeColor="green"
                     >
-                        <img src={incomeSvg} alt="Enrty" />
+                        <img src={incomeSvg} alt="Entry" />
                         <span>Entry</span>
                     </RadioBox>
                     <RadioBox
