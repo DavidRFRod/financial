@@ -1,9 +1,10 @@
-import { FormEvent, useState } from 'react';
+import { FormEvent, useState, useContext } from 'react';
 import Modal from 'react-modal';
 import closeSvg from '../../assets/close.svg';
 import incomeSvg from '../../assets/income.svg';
 import outcomeSvg from '../../assets/outcome.svg';
 import { api } from '../../services/api';
+import { TransactionsContext } from '../../TransactionsContext';
 import { Container, TransactionTypeContainer, RadioBox } from './styles';
 
 interface NewTransactionModalProps {
@@ -12,6 +13,8 @@ interface NewTransactionModalProps {
 }
 
 export function NewTransactionModal({isOpen, onRequestClose} : NewTransactionModalProps) {
+    const { createTransaction} = useContext(TransactionsContext)
+
 
     const [title, setTitle] = useState('');
     const [amount, setAmount] = useState(0)
@@ -21,16 +24,14 @@ export function NewTransactionModal({isOpen, onRequestClose} : NewTransactionMod
    function handleCreateNewTransaction(event: FormEvent) {
        event.preventDefault ();
 
-       const data = {
-           title, 
-           amount,
-           category,
-           type,
+       createTransaction({
+         title,
+         amount,
+         category,
+         type,  
+       })
 
-       }
-       api.post('/transactions', data)
-    }
-     
+    } 
     return (
         <Modal 
         overlayClassName="react-modal-overlay"
